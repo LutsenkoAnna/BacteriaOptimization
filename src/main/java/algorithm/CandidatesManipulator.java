@@ -44,19 +44,20 @@ public class CandidatesManipulator {
         this.function = function;
         //for (int i = 0; i < 20; ++i) {
         int i = 0;
-        while(findMinFunction() > 0.01) {
-            eliminationAndDispersal();
-            //reproduction();
+        while(findMinDiff() > 1.0) {
+            //eliminationAndDispersal();
+            reproduction();
             System.out.println(i++);
             //for (Candidate c : candidates) c.print();
-            System.out.println(findMinFunction());
+            System.out.println(findMinDiff());
         }
     }
 
-    private double findMinFunction() {
+    private double findMinDiff() {
         Candidate minFunction = candidates.stream().min(
-                (p1, p2) -> Double.compare( p1.evaluateFitness(function), p2.evaluateFitness(function))).get();
-        return minFunction.evaluateFitness(function);
+                (p1, p2) -> Double.compare( Math.abs(p1.evaluateFitness(function) - function.getRealMin()),
+                        Math.abs(p2.evaluateFitness(function) - function.getRealMin()))).get();
+        return Math.abs(minFunction.evaluateFitness(function) - function.getRealMin());
     }
 
     private void eliminationAndDispersal() {

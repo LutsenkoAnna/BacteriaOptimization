@@ -1,4 +1,6 @@
 import algorithm.CandidatesManipulator;
+import functions.Rastrigin;
+import functions.Rozenbrok;
 import functions.Spherical;
 
 /**
@@ -8,7 +10,7 @@ public class Main {
     public static void main(String[] args) {
         CandidatesManipulator candidatesManipulator = new CandidatesManipulator();
         try {
-            candidatesManipulator.solve(new Spherical());
+            candidatesManipulator.solve(new Rastrigin());
         } catch (Exception e) {
         }
     }
